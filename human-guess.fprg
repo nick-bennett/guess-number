@@ -4,33 +4,32 @@
         <attribute name="name" value=""/>
         <attribute name="authors" value="Nicholas Bennett"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2020-01-15 03:52:17 PM"/>
+        <attribute name="saved" value="2020-01-15 11:23:13 PM"/>
         <attribute name="created" value="TmljaG9sYXMgQmVubmV0dDtOQi1JTlNQSVJPTi0xNTsyMDIwLTAxLTE1OzAyOjIzOjA1IFBNOzM3OTg="/>
-        <attribute name="edited" value="TmljaG9sYXMgQmVubmV0dDtOQi1JTlNQSVJPTi0xNTsyMDIwLTAxLTE1OzAzOjUyOjE3IFBNOzM7MzkxNA=="/>
+        <attribute name="edited" value="TmljaG9sYXMgQmVubmV0dDtOQi1JTlNQSVJPTi0xNTsyMDIwLTAxLTE1OzExOjIzOjEzIFBNOzU7MzkwOQ=="/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
         <body>
             <declare name="playAgain" type="Boolean" array="False" size=""/>
             <do expression="playAgain">
-                <declare name="secret" type="Integer" array="False" size=""/>
-                <assign variable="secret" expression="1 + Random(100)"/>
-                <call expression="play(secret)"/>
+                <call expression="play()"/>
                 <output expression="&quot;Play again? (y/n)&quot;" newline="True"/>
                 <declare name="playAgainInput" type="String" array="False" size=""/>
                 <input variable="playAgainInput"/>
-                <assign variable="playAgain" expression="(Len(playAgainInput) &gt; 0) &amp;&amp; &#13;&#10;((Char(playAgainInput, 0) == &quot;y&quot;) ||&#13;&#10;(Char(playAgainInput, 0) == &quot;Y&quot;))"/>
+                <assign variable="playAgain" expression="Char(playAgainInput, 0) == &quot;y&quot; ||&#13;&#10;Char(playAgainInput, 0) == &quot;Y&quot;"/>
             </do>
             <output expression="&quot;Game over!&quot;" newline="True"/>
         </body>
     </function>
     <function name="play" type="None" variable="">
-        <parameters>
-            <parameter name="secret" type="Integer" array="False"/>
-        </parameters>
+        <parameters/>
         <body>
+            <declare name="secret" type="Integer" array="False" size=""/>
+            <assign variable="secret" expression="1 + Random(100)"/>
             <declare name="correct" type="Boolean" array="False" size=""/>
-            <output expression="&quot;Type a nummber from 1 to 100.&quot;" newline="True"/>
+            <assign variable="correct" expression="false"/>
+            <output expression="&quot;Type a number from 1 to 100.&quot;" newline="True"/>
             <do expression="!correct">
                 <declare name="guess" type="Integer" array="False" size=""/>
                 <input variable="guess"/>
@@ -40,7 +39,6 @@
                         <output expression="&quot;Good job! The secret number was &quot; &amp; secret" newline="True"/>
                     </then>
                     <else>
-                        <assign variable="correct" expression="false"/>
                         <if expression="guess &lt; secret">
                             <then>
                                 <output expression="&quot;Too low! Guess a higher number!&quot;" newline="True"/>
